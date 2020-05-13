@@ -1,5 +1,6 @@
 # Crops scanned photographs to proper size
 import cv2 as cv
+from datetime import datetime
 
 print("PhotoCrop Alpha V0.1 - May 12, 2020")
 
@@ -30,7 +31,9 @@ for imBox in contours:
 
     croppedPhoto = cropPhoto(photo, imBox)
     cv.imshow(str(index), croppedPhoto)
-    cv.imwrite("Images/img"+str(index)+".png", croppedPhoto)
+    now = datetime.now()
+    filename = "Images/img"+str(index)+now.strftime("_%m%d%Y%H%M%S")+".png"
+    cv.imwrite(filename, croppedPhoto)
 
     # Number the photos in the scan
     cv.putText(photo, str(index), (int(center[0]),int(center[1])), cv.FONT_HERSHEY_COMPLEX, 1, (0,0,0), 2, cv.LINE_AA)
