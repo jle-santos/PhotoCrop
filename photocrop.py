@@ -4,7 +4,7 @@ import cv2 as cv
 print("PhotoCrop Alpha V0.1 - May 12, 2020")
 
 # Open File and show
-photo = cv.imread("test.png")
+photo = cv.imread("Images/test2.png")
 
 imgray = cv.cvtColor(photo, cv.COLOR_BGR2GRAY)
 ret, thresh = cv.threshold(imgray, 254, 255, cv.THRESH_BINARY)
@@ -17,9 +17,7 @@ def cropPhoto(rawScan, photoData):
     (centerX, centerY), (width, height), theta = cv.minAreaRect(photoData)
     (cornerX, cornerY) = (int(centerX-width/2), int(centerY-height/2))
     print("Leftmost corner coordinates: ", (cornerX, cornerY))
-    rangeX = cornerX+int(width)
-
-    croppedPhoto = rawScan[cornerY:cornerY+int(height), cornerX:rangeX]
+    croppedPhoto = rawScan[cornerY:cornerY+int(height), cornerX:cornerX+int(width)]
     return croppedPhoto
 
 # Bounding Box
@@ -32,9 +30,10 @@ for imBox in contours:
 
     croppedPhoto = cropPhoto(photo, imBox)
     cv.imshow(str(index), croppedPhoto)
+    cv.imwrite("Images/img"+str(index)+".png", croppedPhoto)
 
     # Number the photos in the scan
-    cv.putText(photo, str(index) + " " + str(int(theta)) + "deg", (int(center[0]),int(center[1])), cv.FONT_HERSHEY_COMPLEX, 1, (0,0,0), 2, cv.LINE_AA)
+    cv.putText(photo, str(index), (int(center[0]),int(center[1])), cv.FONT_HERSHEY_COMPLEX, 1, (0,0,0), 2, cv.LINE_AA)
 
 while(cv.waitKey(100)):
     cv.imshow("Raw", photo)
