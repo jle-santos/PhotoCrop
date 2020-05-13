@@ -40,4 +40,5 @@ for imBox in contours:
 
 while(cv.waitKey(100)):
     cv.imshow("Raw", photo)
+    cv.imwrite("Marked.png", photo)
     #print("Photos found:", len(contours), "contours")
