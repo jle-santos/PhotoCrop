@@ -23,6 +23,8 @@ def getTransformation(box, cntr):
     return M
 
 def findImages(image):
+    """
+    """
 
     # Images
     imgList = []
