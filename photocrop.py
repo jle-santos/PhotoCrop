@@ -5,6 +5,20 @@ import imutils
 image = cv2.imread('../test2.png')
 
 def getTransformation(box, cntr):
+    """[summary]
+
+    Parameters
+    ----------
+    box : [type]
+        [description]
+    cntr : [type]
+        [description]
+
+    Returns
+    -------
+    [type]
+        [description]
+    """
 
     width = int(cntr[1][0])
     height = int(cntr[1][1])
